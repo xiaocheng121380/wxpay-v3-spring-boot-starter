@@ -4,11 +4,11 @@
 
 #### 改造说明
 
-| 项目         | 原版（0.7）                          | 改造后（0.5）                                   |
+| 项目         | 原版（0.7）                          | 改造后（0.6）                                   |
 | ------------ | ------------------------------------ | ----------------------------------------------- |
-| groupId      | `top.rwocj`                          | `com.github.rwocj`                              |
-| 包名         | `top.rwocj.wx.pay.*`                 | `com.github.rwocj.wx.*`                         |
-| core 包      | `top.rwocj.wx.pay.core`              | `com.github.rwocj.wx.base`                      |
+| groupId      | `top.rwocj`                          | `com.coderyang`                                 |
+| 包名         | `top.rwocj.wx.pay.*`                 | `com.coderyang.wx.*`                            |
+| core 包      | `top.rwocj.wx.pay.core`              | `com.coderyang.wx.base`                         |
 | WxProperties | 平铺结构，prefix=`wx.pay`            | 嵌套结构（`appId` + `Pay` 子对象），prefix=`wx` |
 | Servlet API  | `jakarta.servlet`（Spring Boot 3.x） | 同左                                            |
 | 自动配置     | `AutoConfiguration.imports`          | 同左                                            |
@@ -21,9 +21,9 @@
 
 ```xml
 <dependency>
-  <groupId>com.github.rwocj</groupId>
+  <groupId>com.coderyang</groupId>
   <artifactId>wxpay-v3-spring-boot-starter</artifactId>
-  <version>0.5</version>
+  <version>0.6</version>
 </dependency>
 ```
 
@@ -37,9 +37,13 @@ wx:
   pay:
     mch-id: 商户id
     api-v3-key: v3密钥
-    p12-path: classpath:/cert/API证书.p12
+    certificate-serial-no: API证书序列号
+    private-key-path: classpath:/cert/apiclient_key.pem
     notify-url: https://xxx/支付结果通知地址
     refund-notify-url: https://xxx/退款通知地址(可选)
+    # 可选：微信支付公钥模式（配置后优先用公钥验签，未配置则自动下载平台证书）
+    # public-key-id: PUB_KEY_ID_xxx
+    # public-key-path: classpath:/cert/pub_key.pem
 ```
 
 - 3、在业务Service/Controller中注入WxPayV3Service即可
