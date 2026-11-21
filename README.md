@@ -1,5 +1,7 @@
 # wxpay-v3-spring-boot-starter
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+
 基于 OkHttp 实现的微信支付 V3 **直连商户（普通商户）** Spring Boot Starter，适配 **Spring Boot 3.x**（jakarta）与 **JDK 17+**。
 
 > 本项目基于 [rwocj/wxpay-v3-spring-boot-starter](https://github.com/rwocj/wxpay-v3-spring-boot-starter) 二次改造，调整了包名与配置结构，并补充了直连商户退款、微信支付公钥验签等能力，差异见[与上游的差异](#与上游的差异)。
@@ -214,4 +216,4 @@ com.coderyang.wx
 
 ## License
 
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](LICENSE) · [NOTICE](NOTICE)

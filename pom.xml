@@ -15,6 +15,7 @@
     <version>0.6</version>
     <name>wxpay-v3-spring-boot-starter</name>
     <description>基于 OkHttp 实现的微信支付 V3 直连商户 Spring Boot Starter</description>
+    <url>https://github.com/xiaocheng121380/wxpay-v3-spring-boot-starter</url>
 
     <licenses>
         <license>
@@ -22,6 +23,19 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <id>xiaocheng121380</id>
+            <name>xiaocheng</name>
+            <email>3165129969@qq.com</email>
+            <url>https://github.com/xiaocheng121380</url>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/xiaocheng121380/wxpay-v3-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:https://github.com/xiaocheng121380/wxpay-v3-spring-boot-starter.git</developerConnection>
+        <url>https://github.com/xiaocheng121380/wxpay-v3-spring-boot-starter</url>
+    </scm>
 
     <properties>
         <java.version>17</java.version>
