@@ -103,7 +103,7 @@ JSAPICreateOrderRes res = wxPayV3Service.createJSAPIOrder(request);
 WxCreateOrderRequest request = new WxCreateOrderRequest(
         "测试商品",
         "ORDER_20260101_000002",
-        OrderType.nativeS,                    // app / jsapi / nativeS / h5
+        OrderType.NATIVE,                     // APP / JSAPI / NATIVE / H5
         new WxCreateOrderRequest.Amount(1),
         null);                                // payer，JSAPI 支付时必填
 
@@ -113,7 +113,7 @@ String result = wxPayV3Service.createOrder(request);
 // app、jsapi -> prepay_id；nativeS -> code_url；h5 -> h5_url
 ```
 
-> APP 调起支付所需的 `paySign` 可通过 `wxPayV3Service.appPaySign(wxProperties, timestamp, nonceStr, prepayId)` 生成。
+> APP 调起支付所需的 `paySign` 可通过 `wxPayV3Service.appPaySign(timestamp, nonceStr, prepayId)` 生成。
 
 #### 查询与关单
 
@@ -161,6 +161,10 @@ public ResponseEntity<Void> refundNotify(HttpServletRequest request) {
 ```
 
 > 回调接口需返回 HTTP 200/204（无响应体），返回其他状态码微信会重试。
+>
+> 若请求体已被网关/过滤器提前读取，或不在 Servlet 环境，可改用重载
+> `validateAndDecryptPayNotification(WxHeaders headers, String body)` /
+> `validateAndDecryptRefundNotification(WxHeaders headers, String body)`。
 
 #### 调用未封装的接口
 

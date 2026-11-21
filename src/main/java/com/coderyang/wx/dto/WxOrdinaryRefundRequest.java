@@ -15,8 +15,6 @@ import java.util.List;
  * <p>POST {@code https://api.mch.weixin.qq.com/v3/refund/domestic/refunds}
  *
  * <p>{@link #transactionId} 与 {@link #outTradeNo} 二选一必填。
- *
- * @author Copilot
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

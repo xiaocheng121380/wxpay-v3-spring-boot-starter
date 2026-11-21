@@ -16,6 +16,8 @@ import java.util.List;
 
 public class WxPayUtil {
 
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
     private WxPayUtil() {
 
     }
@@ -32,24 +34,19 @@ public class WxPayUtil {
     public static List<X509Certificate> deserializeToCerts(byte[] apiV3Key, String body)
             throws GeneralSecurityException, IOException {
         AesUtil decryptor = new AesUtil(apiV3Key);
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode dataNode = mapper.readTree(body).get("data");
+        JsonNode dataNode = MAPPER.readTree(body).get("data");
         List<X509Certificate> newCertList = new ArrayList<>();
         if (dataNode != null) {
             for (int i = 0, count = dataNode.size(); i < count; i++) {
-                JsonNode encryptCertificateNode = dataNode.get(i).get("encrypt_certificate");
-                //解密
+                JsonNode encryptCertificate = dataNode.get(i).get("encrypt_certificate");
                 String cert = decryptor.decryptToString(
-                        encryptCertificateNode.get("associated_data").toString().replaceAll("\"", "")
-                                .getBytes(StandardCharsets.UTF_8),
-                        encryptCertificateNode.get("nonce").toString().replaceAll("\"", "")
-                                .getBytes(StandardCharsets.UTF_8),
-                        encryptCertificateNode.get("ciphertext").toString().replaceAll("\"", ""));
+                        encryptCertificate.get("associated_data").asText().getBytes(StandardCharsets.UTF_8),
+                        encryptCertificate.get("nonce").asText().getBytes(StandardCharsets.UTF_8),
+                        encryptCertificate.get("ciphertext").asText());
 
                 CertificateFactory cf = CertificateFactory.getInstance("X509");
                 X509Certificate x509Cert = (X509Certificate) cf.generateCertificate(
-                        new ByteArrayInputStream(cert.getBytes(StandardCharsets.UTF_8))
-                );
+                        new ByteArrayInputStream(cert.getBytes(StandardCharsets.UTF_8)));
                 try {
                     x509Cert.checkValidity();
                 } catch (CertificateExpiredException | CertificateNotYetValidException e) {
@@ -60,5 +57,4 @@ public class WxPayUtil {
         }
         return newCertList;
     }
-
 }

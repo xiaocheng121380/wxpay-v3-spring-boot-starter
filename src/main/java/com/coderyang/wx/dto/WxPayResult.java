@@ -57,7 +57,7 @@ public class WxPayResult {
      * @mock 2018-06-08T10:34:56+08:00
      */
     @JsonProperty(value = "success_time", required = true)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'+'08:00")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date successTime;
     /**
      * 支付者

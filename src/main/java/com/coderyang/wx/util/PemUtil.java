@@ -13,6 +13,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
+import org.springframework.core.io.DefaultResourceLoader;
+
 public class PemUtil {
 
     private PemUtil() {
@@ -30,7 +32,7 @@ public class PemUtil {
         if (pathOrContent.contains("-----BEGIN")) {
             return loadPrivateKeyFromString(pathOrContent);
         }
-        try (InputStream is = new org.springframework.core.io.DefaultResourceLoader()
+        try (InputStream is = new DefaultResourceLoader()
                 .getResource(pathOrContent).getInputStream()) {
             return loadPrivateKey(is);
         } catch (IOException e) {
@@ -48,7 +50,7 @@ public class PemUtil {
         if (pathOrContent.contains("-----BEGIN")) {
             return loadPublicKeyFromString(pathOrContent);
         }
-        try (InputStream is = new org.springframework.core.io.DefaultResourceLoader()
+        try (InputStream is = new DefaultResourceLoader()
                 .getResource(pathOrContent).getInputStream()) {
             return loadPublicKey(is);
         } catch (IOException e) {

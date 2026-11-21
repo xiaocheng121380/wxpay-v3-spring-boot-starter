@@ -117,7 +117,7 @@ public class WxCreateOrderRequest {
     }
 
     public static WxCreateOrderRequest jsapiOrder(String description, String outTradeNo, Amount amount, Payer payer) {
-        return new WxCreateOrderRequest(description, outTradeNo, OrderType.jsapi, amount, payer);
+        return new WxCreateOrderRequest(description, outTradeNo, OrderType.JSAPI, amount, payer);
     }
 
     @Data

@@ -7,8 +7,6 @@ import java.util.List;
  * <p>
  * 用于同时支持「微信支付公钥」和「平台证书」两种验签模式：
  * 公钥模式优先（无网络开销），失败则回退到平台证书模式。
- *
- * @author Copilot
  */
 public class CompositeSignVerifier implements SignVerifier {
 

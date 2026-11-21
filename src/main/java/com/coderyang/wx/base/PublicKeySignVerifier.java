@@ -15,8 +15,6 @@ import java.util.Base64;
  * <p>
  * 当商户在商户平台启用了「微信支付公钥」（应答 header `Wechatpay-Serial` 形如 `PUB_KEY_ID_xxx`），
  * 平台不再返回平台证书，需用商户后台下载的公钥进行验签。
- *
- * @author Copilot
  */
 public class PublicKeySignVerifier implements SignVerifier {
 

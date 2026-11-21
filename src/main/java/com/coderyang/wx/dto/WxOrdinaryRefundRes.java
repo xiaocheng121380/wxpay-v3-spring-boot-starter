@@ -1,5 +1,6 @@
 package com.coderyang.wx.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -11,8 +12,6 @@ import java.util.List;
  *
  * <p>对应官方文档：
  * <a href="https://pay.weixin.qq.com/docs/merchant/apis/refund/refunds/create.html">普通商户/退款申请</a>
- *
- * @author Copilot
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -57,7 +56,7 @@ public class WxOrdinaryRefundRes {
      * 同时保留 status 别名兼容同步响应，确保两类来源都能正确反序列化。
      */
     @JsonProperty("refund_status")
-    @com.fasterxml.jackson.annotation.JsonAlias({"status"})
+    @JsonAlias({"status"})
     private String status;
 
     /** 资金账户：UNSETTLED / AVAILABLE / UNAVAILABLE / OPERATION / BASIC / ECNY_BASIC */
@@ -70,7 +69,7 @@ public class WxOrdinaryRefundRes {
 
     /** 优惠退款信息 */
     @JsonProperty("promotion_detail")
-    private List<WxRefundRes.PromotionDetail> promotionDetail;
+    private List<PromotionDetail> promotionDetail;
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -91,5 +90,25 @@ public class WxOrdinaryRefundRes {
         private int discountRefund;
         @JsonProperty("currency")
         private String currency;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class PromotionDetail {
+        /** 券 ID */
+        @JsonProperty("promotion_id")
+        private String promotionId;
+        /** 优惠范围：GLOBAL / SINGLE */
+        @JsonProperty("scope")
+        private String scope;
+        /** 优惠类型：COUPON / DISCOUNT */
+        @JsonProperty("type")
+        private String type;
+        /** 优惠券面额 */
+        @JsonProperty("amount")
+        private int amount;
+        /** 优惠退款金额 */
+        @JsonProperty("refund_amount")
+        private int refundAmount;
     }
 }

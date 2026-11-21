@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 /**
  * 支付者信息
  *
- * @author lqb
  * @since 2024/7/8 14:55
  **/
 @JsonIgnoreProperties(ignoreUnknown = true)
